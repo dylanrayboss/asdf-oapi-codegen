@@ -49,25 +49,26 @@ download_release() {
 }
 
 install_version() {
-  local install_type="$1"
-  local version="$2"
-  local install_path="$3"
+	local install_type="$1"
+	local version="$2"
+	local install_path="${3%/bin}/bin"
 
-  if [ "$install_type" != "version" ]; then
-    fail "asdf-$TOOL_NAME supports release installs only"
-  fi
+	if [ "$install_type" != "version" ]; then
+		fail "asdf-$TOOL_NAME supports release installs only"
+	fi
 
-  (
-    mkdir -p "$install_path/bin"
-    cp "$ASDF_DOWNLOAD_PATH/$TOOL_NAME" "$install_path/bin/"
+	(
+		mkdir -p "$install_path"
+		cp -r "$ASDF_DOWNLOAD_PATH"/* "$install_path"
 
-    local tool_cmd
-    tool_cmd="$(echo "$TOOL_TEST" | cut -d' ' -f1)"
-    test -x "$install_path/bin/$tool_cmd" || fail "Expected $install_path/bin/$tool_cmd to be executable."
+		# TODO: Assert oapi-codegen executable exists.
+		local tool_cmd
+		tool_cmd="$(echo "$TOOL_TEST" | cut -d' ' -f1)"
+		test -x "$install_path/$tool_cmd" || fail "Expected $install_path/$tool_cmd to be executable."
 
-    echo "$TOOL_NAME $version installation was successful!"
-  ) || (
-    rm -rf "$install_path"
-    fail "An error ocurred while installing $TOOL_NAME $version."
-  )
+		echo "$TOOL_NAME $version installation was successful!"
+	) || (
+		rm -rf "$install_path"
+		fail "An error occurred while installing $TOOL_NAME $version."
+	)
 }
