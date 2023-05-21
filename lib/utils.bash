@@ -3,7 +3,8 @@
 set -euo pipefail
 
 # TODO: Ensure this is the correct GitHub homepage where releases can be downloaded for oapi-codegen.
-GH_REPO="https://github.com/deepmap/oapi-codegen"
+GO_PACKAGE="github.com/deepmap/oapi-codegen"
+GH_REPO="https://$GO_PACKAGE"
 TOOL_NAME="oapi-codegen"
 TOOL_TEST="oapi-codegen --version"
 
