@@ -82,7 +82,7 @@ install_version() {
     # normal, except that we'll dump the binary into the install path instead
     # of $GOPATH/bin.
     export GOBIN="$install_path"
-    go install "$GO_PACKAGE"@"$version" || fail "An error occurred while installing $TOOL_NAME $version."
+    go install "$GO_INSTALL"@"$version" || fail "An error occurred while installing $TOOL_NAME $version."
 
     local tool_cmd
     tool_cmd="$(echo "$TOOL_TEST" | cut -d' ' -f1)"
