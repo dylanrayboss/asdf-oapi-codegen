@@ -1,18 +1,6 @@
 version: 2
 updates:
-<<<<<<< HEAD
-=======
-  # dependabot for GitHub Actions for this repo
->>>>>>> f31da0c3fc5a28058f20e5ec6fb81e225e70b1eb
   - package-ecosystem: "github-actions"
     directory: "./github"
     schedule:
       interval: "weekly"
-<<<<<<< HEAD
-=======
-  # dependabot for GitHub Actions for the template
-  - package-ecosystem: "github-actions"
-    directory: "template/.github/"
-    schedule:
-      interval: "weekly"
->>>>>>> f31da0c3fc5a28058f20e5ec6fb81e225e70b1eb
