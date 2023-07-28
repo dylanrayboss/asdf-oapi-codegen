@@ -23,6 +23,8 @@ This plugin depends on common POSIX utilities (awk, grep, sed, etc.), Bash, Git,
 Plugin:
 
 ```shell
+asdf plugin add oapi-codegen
+# or
 asdf plugin add oapi-codegen https://github.com/dylanrayboss/asdf-oapi-codegen.git
 ```
 
