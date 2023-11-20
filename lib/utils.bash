@@ -2,8 +2,8 @@
 
 set -euo pipefail
 
-# TODO: Ensure this is the correct GitHub homepage where releases can be downloaded for oapi-codegen.
 GO_PACKAGE="github.com/deepmap/oapi-codegen/cmd/oapi-codegen"
+GO_V2_PACKAGE="github.com/deepmap/oapi-codegen/v2/cmd/oapi-codegen"
 GH_REPO="https://github.com/deepmap/oapi-codegen"
 TOOL_NAME="oapi-codegen"
 TOOL_TEST="oapi-codegen --version"
@@ -34,6 +34,7 @@ install_version() {
   local install_path="${3%/bin}/bin"
 
   if [ "$install_type" = "version" ]; then
+    read major minor patch < <(echo $version | ( IFS=".$IFS" ; read a b c && echo $a $b $c ))
     version="v$version"
   fi
 
@@ -61,7 +62,11 @@ install_version() {
     # normal, except that we'll dump the binary into the install path instead
     # of $GOPATH/bin.
     export GOBIN="$install_path"
-    go install "$GO_PACKAGE"@"$version" || fail "An error occurred while installing $TOOL_NAME $version."
+    if [ "$major" = "1" ]; then
+        go install "$GO_PACKAGE"@"$version" || fail "An error occurred while installing $TOOL_NAME $version."
+    else
+        go install "$GO_V2_PACKAGE"@"$version" || fail "An error occurred while installing $TOOL_NAME $version."
+    fi
 
     local tool_cmd
     tool_cmd="$(echo "$TOOL_TEST" | cut -d' ' -f1)"
