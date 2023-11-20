@@ -34,7 +34,10 @@ install_version() {
   local install_path="${3%/bin}/bin"
 
   if [ "$install_type" = "version" ]; then
-    read major minor patch < <(echo $version | ( IFS=".$IFS" ; read a b c && echo $a $b $c ))
+    read major minor patch < <(echo $version | (
+      IFS=".$IFS"
+      read a b c && echo $a $b $c
+    ))
     version="v$version"
   fi
 
@@ -63,9 +66,9 @@ install_version() {
     # of $GOPATH/bin.
     export GOBIN="$install_path"
     if [ "$major" = "1" ]; then
-        go install "$GO_PACKAGE"@"$version" || fail "An error occurred while installing $TOOL_NAME $version."
+      go install "$GO_PACKAGE"@"$version" || fail "An error occurred while installing $TOOL_NAME $version."
     else
-        go install "$GO_V2_PACKAGE"@"$version" || fail "An error occurred while installing $TOOL_NAME $version."
+      go install "$GO_V2_PACKAGE"@"$version" || fail "An error occurred while installing $TOOL_NAME $version."
     fi
 
     local tool_cmd
