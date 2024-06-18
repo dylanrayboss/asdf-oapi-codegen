@@ -3,7 +3,7 @@
 # asdf-oapi-codegen [![Build](https://github.com/dylanrayboss/asdf-oapi-codegen/actions/workflows/build.yml/badge.svg)](https://github.com/dylanrayboss/asdf-oapi-codegen/actions/workflows/build.yml) [![Lint](https://github.com/dylanrayboss/asdf-oapi-codegen/actions/workflows/lint.yml/badge.svg)](https://github.com/dylanrayboss/asdf-oapi-codegen/actions/workflows/lint.yml)
 
 
-[oapi-codegen](https://github.com/deepmap/oapi-codegen) plugin for the [asdf version manager](https://asdf-vm.com).
+[oapi-codegen](https://github.com/oapi-codegen/oapi-codegen) plugin for the [asdf version manager](https://asdf-vm.com).
 
 </div>
 

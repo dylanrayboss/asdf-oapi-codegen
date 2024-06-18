@@ -2,9 +2,10 @@
 
 set -euo pipefail
 
-GO_PACKAGE="github.com/deepmap/oapi-codegen/cmd/oapi-codegen"
-GO_V2_PACKAGE="github.com/deepmap/oapi-codegen/v2/cmd/oapi-codegen"
-GH_REPO="https://github.com/deepmap/oapi-codegen"
+GO_DEEPMAP_V1_PACKAGE="github.com/deepmap/oapi-codegen/cmd/oapi-codegen"
+GO_DEEPMAP_V2_PACKAGE="github.com/deepmap/oapi-codegen/v2/cmd/oapi-codegen"
+GO_V2_PACKAGE="github.com/oapi-codegen/oapi-codegen/v2/cmd/oapi-codegen"
+GH_REPO="https://github.com/oapi-codegen/oapi-codegen"
 TOOL_NAME="oapi-codegen"
 TOOL_TEST="oapi-codegen --version"
 
@@ -66,7 +67,9 @@ install_version() {
     # of $GOPATH/bin.
     export GOBIN="$install_path"
     if [ "$major" = "1" ]; then
-      go install "$GO_PACKAGE"@"$version" || fail "An error occurred while installing $TOOL_NAME $version."
+      go install "$GO_DEEPMAP_V1_PACKAGE"@"$version" || fail "An error occurred while installing $TOOL_NAME $version."
+    elif [ "$major" = "2" ] && ([ "$minor" = "0" ] || [ "$minor" = "1" ] || [ "$minor" = "2" ]); then
+      go install "$GO_DEEPMAP_V2_PACKAGE"@"$version" || fail "An error occurred while installing $TOOL_NAME $version."
     else
       go install "$GO_V2_PACKAGE"@"$version" || fail "An error occurred while installing $TOOL_NAME $version."
     fi
